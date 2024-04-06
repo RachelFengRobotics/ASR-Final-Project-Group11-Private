@@ -9,6 +9,8 @@ Panels:
         - /Sensing1
         - /Localization1
         - /Planning1
+        - /Planning1/Full Path1/Status1
+        - /Planning1/Local Path1
         - /Evaluation1
       Splitter Ratio: 0.6628242135047913
     Tree Height: 438
@@ -238,8 +240,8 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 13.978616714477539
-            Min Value: 4.047664642333984
+            Max Value: 4.883259296417236
+            Min Value: -1.132419228553772
             Value: true
           Axis: X
           Channel Name: intensity
@@ -266,8 +268,8 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 1.4930524826049805
-            Min Value: -0.07171478867530823
+            Max Value: 2.434854507446289
+            Min Value: -0.07024946808815002
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -316,9 +318,7 @@ Visualization Manager:
             Grid: true
             InteractiveMarkers: true
             Localization:
-              AMCL PoseArray: true
-              AMCL PoseWithCovariance: true
-              Map: true
+              "": true
               Value: true
             Planning:
               Foot Print: true
@@ -461,7 +461,7 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /move_base/NavfnROS/plan
+          Topic: /move_base/TebLocalPlannerROS/global_plan
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -485,7 +485,7 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /move_base/TrajectoryPlannerROS/local_plan
+          Topic: /move_base/TebLocalPlannerROS/local_plan
           Unreliable: false
           Value: true
         - Alpha: 0.699999988079071
@@ -704,7 +704,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 10
+      Distance: 22.798343658447266
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -720,9 +720,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7853981852531433
+      Pitch: 1.255397915840149
       Target Frame: base_link
-      Yaw: 0.7853981852531433
+      Yaw: 2.150398015975952
     Saved:
       - Class: rviz/ThirdPersonFollower
         Distance: 4
@@ -778,7 +778,7 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 0
-  Y: 0
+  X: 72
+  Y: 27
   simplePanel:
     collapsed: false
