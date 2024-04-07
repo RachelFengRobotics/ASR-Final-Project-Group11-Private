@@ -66,6 +66,10 @@ class simplePanel : public rviz::Panel
     void on_button_3_1_clicked();
     void on_button_3_2_clicked();
     void on_button_3_3_clicked();
+    void on_button_3_4_clicked();
+    void on_button_3_5_clicked();
+    void on_button_3_6_clicked();
+    void on_button_3_7_clicked();
     // Contorl Buttons
     void on_button_regen_clicked();
     void on_button_clear_clicked();

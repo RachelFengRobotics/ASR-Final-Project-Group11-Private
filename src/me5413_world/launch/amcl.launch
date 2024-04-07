@@ -37,7 +37,7 @@
     <!-- Translational movement required before performing a filter update.  -->
     <param name="update_min_d" value="0.1"/>
     <!--Rotational movement required before performing a filter update. -->
-    <param name="update_min_a" value="0.2"/> 
+    <param name="update_min_a" value="0.05"/> 
     <!-- <param name="update_min_a" value="0.314"/>  -->
     <param name="odom_frame_id" value="odom"/>
     <param name="base_frame_id" value="base_link"/>
