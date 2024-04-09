@@ -10,8 +10,8 @@ me5413_world:
 
   # assembly line poses
   assembly_line_1:
-    x: 10.0
-    y: -0.6
+    x: 4.0
+    y: -1.7
     yaw: -1.57
   assembly_line_2:
     x: 4.0
@@ -39,14 +39,26 @@ me5413_world:
     y: 1
     yaw: -0.785
   vehicle_5:
-    x: 16.0
-    y: 1
-    yaw: -0.785
-  vehicle_6:
-    x: 16.0
-    y: -6.25
-    yaw: 0.785
-  vehicle_7:
     x: 8.0
     y: -6.25
     yaw: 0.785
+
+    
+  
+  
+  vehicle_6:
+    x: 13.0
+    y: -6.25
+    yaw: 2.356
+  vehicle_7:
+    x: 16.0
+    y: 1
+    yaw: -2.356
+  vehicle_8:
+    x: 12.0
+    y: -3
+    yaw: -1.57
+  start_1:
+    x: 13.0
+    y: 1.6
+    yaw: -0.525

@@ -50,8 +50,8 @@ class ObjectFollower:
             goal_pose = PoseStamped()
             goal_pose.header.stamp = rospy.Time.now()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = self.current_pose.position.x + 2 * cos(yaw)
-            goal_pose.pose.position.y = self.current_pose.position.y + 2 * sin(yaw)
+            goal_pose.pose.position.x = self.current_pose.position.x + 1.5 * cos(yaw)
+            goal_pose.pose.position.y = self.current_pose.position.y + 1.5 * sin(yaw)
             goal_pose.pose.orientation = self.current_pose.orientation
 
             self.goal_pub.publish(goal_pose)

@@ -14,3 +14,14 @@ global_costmap:
      - {name: prohibition_layer,        type: "costmap_prohibition_layer_namespace::CostmapProhibitionLayer"}     
     #  - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
      - {name: inflater_layer, type: "costmap_2d::InflationLayer"}
+
+  recovery_behaviors:
+    - name: 'rotate_recovery'
+      type: 'rotate_revocery/RotateRecovery'
+    - name: 'reset_recovery'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  
+  reset_recovery:
+    reset_distance: 0.0
+    layer_names: ["obstacle_layer"]
+

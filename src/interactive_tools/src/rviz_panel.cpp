@@ -33,6 +33,7 @@ namespace rviz_panel
         connect(ui_->pushButton_2_2, SIGNAL(clicked()), this, SLOT(on_button_2_2_clicked()));
         connect(ui_->pushButton_2_3, SIGNAL(clicked()), this, SLOT(on_button_2_3_clicked()));
         connect(ui_->pushButton_2_4, SIGNAL(clicked()), this, SLOT(on_button_2_4_clicked()));
+        connect(ui_->pushButton_2_5, SIGNAL(clicked()), this, SLOT(on_button_2_5_clicked()));
 
         connect(ui_->pushButton_3_1, SIGNAL(clicked()), this, SLOT(on_button_3_1_clicked()));
         connect(ui_->pushButton_3_2, SIGNAL(clicked()), this, SLOT(on_button_3_2_clicked()));
@@ -40,7 +41,10 @@ namespace rviz_panel
         connect(ui_->pushButton_3_4, SIGNAL(clicked()), this, SLOT(on_button_3_4_clicked()));
         connect(ui_->pushButton_3_5, SIGNAL(clicked()), this, SLOT(on_button_3_5_clicked()));
         connect(ui_->pushButton_3_6, SIGNAL(clicked()), this, SLOT(on_button_3_6_clicked()));
-        connect(ui_->pushButton_3_7, SIGNAL(clicked()), this, SLOT(on_button_3_7_clicked()));
+        connect(ui_->pushButton_3_7, SIGNAL(clicked()), this, SLOT(on_button_3_7_clicked()));       
+        connect(ui_->pushButton_3_8, SIGNAL(clicked()), this, SLOT(on_button_3_8_clicked()));
+        
+        
 
 
         connect(ui_->pushButton_regen, SIGNAL(clicked()), this, SLOT(on_button_regen_clicked()));
@@ -121,32 +125,46 @@ namespace rviz_panel
 
     void simplePanel::on_button_3_4_clicked()
     {
-        ROS_INFO_STREAM("Setting Vehicle 4 as the GOAL.");
-        ui_->label_status->setText("Heading to Vehicle 4");
+        ROS_INFO_STREAM("Setting 1 as the GOAL.");
+        ui_->label_status->setText("Heading to 1");
         this->goal_name_msg_.data = "/vehicle_4";
         this->pub_goal_.publish(this->goal_name_msg_);
     }
 
     void simplePanel::on_button_3_5_clicked()
     {
-        ROS_INFO_STREAM("Setting Vehicle 4 as the GOAL.");
-        ui_->label_status->setText("Heading to Vehicle 4");
+        ROS_INFO_STREAM("Setting 2 as the GOAL.");
+        ui_->label_status->setText("Heading to 2");
         this->goal_name_msg_.data = "/vehicle_5";
         this->pub_goal_.publish(this->goal_name_msg_);
     }
 
     void simplePanel::on_button_3_6_clicked()
     {
-        ROS_INFO_STREAM("Setting Vehicle 6 as the GOAL.");
-        ui_->label_status->setText("Heading to Vehicle 6");
+        ROS_INFO_STREAM("Setting 3 as the GOAL.");
+        ui_->label_status->setText("Heading to 3");
         this->goal_name_msg_.data = "/vehicle_6";
         this->pub_goal_.publish(this->goal_name_msg_);
     }
     void simplePanel::on_button_3_7_clicked()
     {
-        ROS_INFO_STREAM("Setting Vehicle 7 as the GOAL.");
-        ui_->label_status->setText("Heading to Vehicle 7");
+        ROS_INFO_STREAM("Setting 4 as the GOAL.");
+        ui_->label_status->setText("Heading to 4");
         this->goal_name_msg_.data = "/vehicle_7";
+        this->pub_goal_.publish(this->goal_name_msg_);
+    }
+    void simplePanel::on_button_3_8_clicked()
+    {
+        ROS_INFO_STREAM("Setting 5 as the GOAL.");
+        ui_->label_status->setText("Heading to 5");
+        this->goal_name_msg_.data = "/vehicle_8";
+        this->pub_goal_.publish(this->goal_name_msg_);
+    }
+    void simplePanel::on_button_2_5_clicked()
+    {
+        ROS_INFO_STREAM("Setting start_1 as the GOAL.");
+        ui_->label_status->setText("Heading to start");
+        this->goal_name_msg_.data = "/start_1";
         this->pub_goal_.publish(this->goal_name_msg_);
     }
 

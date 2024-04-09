@@ -62,6 +62,7 @@ class simplePanel : public rviz::Panel
     void on_button_2_2_clicked();
     void on_button_2_3_clicked();
     void on_button_2_4_clicked();
+    void on_button_2_5_clicked();
     // Delivery Vehicle buttons
     void on_button_3_1_clicked();
     void on_button_3_2_clicked();
@@ -70,6 +71,9 @@ class simplePanel : public rviz::Panel
     void on_button_3_5_clicked();
     void on_button_3_6_clicked();
     void on_button_3_7_clicked();
+    void on_button_3_8_clicked();
+   
+
     // Contorl Buttons
     void on_button_regen_clicked();
     void on_button_clear_clicked();
