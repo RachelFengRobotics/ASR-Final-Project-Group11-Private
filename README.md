@@ -44,9 +44,15 @@ You can quickly understand the final outcomes of our project by watching this vi
   * `jackal_navigation`
   * `velodyne_simulator`
   * `teleop_twist_keyboard`
+<<<<<<< HEAD
   * `teb planner`->`sudo apt-get install ros-noetic-teb-local-planner`
   * `rviz-plugin`->`sudo apt-get install ros-noetic-rviz-imu-plugin`
   * `find_object_2d`->`sudo apt-get install ros-noetic-find-object-2d`
+=======
+  * sudo apt-get install ros-noetic-teb-local-planner
+  * sudo apt-get install ros-noetic-rviz-imu-plugin
+  * sudo apt-get install ros-noetic-find-object-2d
+>>>>>>> e679f0a5b8b8bec7851f514558dc1597bcc10e74
   * And this [gazebo_model](https://github.com/osrf/gazebo_models) repositiory
 
 ## Installation
@@ -265,11 +271,16 @@ Then, in the second terminal:
 ```bash
 # Load a map and launch AMCL localizer
 roslaunch me5413_world navigation.launch
+# Choose the five observation points base on your target box location
+Click the button on Rviz Panel
+# Use our vison algorithm to navigate towards the target box
+roslaunch nav_box nav_box_type2.launch 
 ```
 ![rviz_navigation_image](src/me5413_world/media/nav.png)
 
 You can also configure different local planning algorithms by modifying the. launch file:
 
+<<<<<<< HEAD
 ```bash
 gedit ~/src/me5413_world/launch/navigation.launch &
 ```
@@ -313,6 +324,9 @@ roslaunch nav_box nav_box_type2.launch
 
 ![rviz_navigation_image](src/me5413_world/media/nav_box.gif)
 ![rviz_navigation_image](src/me5413_world/media/nav3.png)
+=======
+
+>>>>>>> e679f0a5b8b8bec7851f514558dc1597bcc10e74
 
 ## Contribution
 
