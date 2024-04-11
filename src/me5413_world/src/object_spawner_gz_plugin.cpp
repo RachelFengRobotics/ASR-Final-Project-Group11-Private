@@ -44,21 +44,15 @@ void ObjectSpawner::spawnRandomCones()
   msgs::Factory cone_msg;
   cone_msg.set_sdf_filename("model://construction_cone");
 
-  std::srand(std::time(0));
-  if (std::rand() % 2 == 0)
-  {
-    msgs::Set(cone_msg.mutable_pose(), ignition::math::Pose3d(
-                ignition::math::Vector3d(12.7, 2.5, 0.1),
-                ignition::math::Quaterniond(0, 0, 0)));
-  }
-  else
+  if (true) // 模拟总是进入偶数逻辑分支
   {
     msgs::Set(cone_msg.mutable_pose(), ignition::math::Pose3d(
                 ignition::math::Vector3d(16.9, 2.5, 0.1),
                 ignition::math::Quaterniond(0, 0, 0)));
   }
+ 
   this->pub_factory_->Publish(cone_msg);
-  
+ 
   return;
 };
 
