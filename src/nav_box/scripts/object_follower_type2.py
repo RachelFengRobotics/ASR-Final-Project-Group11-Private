@@ -43,10 +43,10 @@ class ObjectFollower:
                     self.rotate_timer.shutdown()  # 中断当前的旋转计时器
                 self.is_rotating = False  # 重置旋转状态
             # 无论是否旋转，只要检测到物体就发布新的目标位置
-            if (current_time - self.last_published_time).to_sec() >= 2.0:
+            if (current_time - self.last_published_time).to_sec() >= 1.5:
                 self.publish_goal(current_time)
                 self.last_published_time = current_time
-        elif self.object_detected_once and (current_time - self.last_published_time).to_sec() >= 7.0 and not self.is_rotating:
+        elif self.object_detected_once and (current_time - self.last_published_time).to_sec() >= 8.5 and not self.is_rotating:
             # 如果一段时间内没有检测到物体，并且不在旋转状态，则开始右旋
             self.rotate_right_degrees(current_time)
 

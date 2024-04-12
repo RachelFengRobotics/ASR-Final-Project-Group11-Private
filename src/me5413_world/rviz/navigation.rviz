@@ -350,7 +350,9 @@ Visualization Manager:
             Grid: true
             InteractiveMarkers: true
             Localization:
-              "": true
+              AMCL PoseArray: true
+              AMCL PoseWithCovariance: true
+              Map: true
               Value: true
             Planning:
               Foot Print: true
@@ -499,7 +501,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 206; 92; 0
           Enabled: true
           Head Diameter: 0.30000001192092896
           Head Length: 0.20000000298023224
@@ -735,7 +737,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.019999979063868523
+      Angle: -0.014999980106949806
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -745,10 +747,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 37.942508697509766
+      Scale: 72.78813934326172
       Target Frame: base_link
-      X: 6.433860778808594
-      Y: 0.6460129022598267
+      X: 5.155908107757568
+      Y: -2.1103060245513916
     Saved:
       - Class: rviz/ThirdPersonFollower
         Distance: 4
@@ -804,7 +806,7 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 72
-  Y: 27
+  X: 89
+  Y: 102
   simplePanel:
     collapsed: false

@@ -58,96 +58,104 @@ void ObjectSpawner::spawnRandomCones()
 
 void ObjectSpawner::spawnRandomBoxes(const int num)
 {
-  if (num > 9)
-  {
-    ROS_WARN_STREAM("Maximum 9 boxes are allowed!, Spawning 9 boxes instead");
-  }
-
-  std::srand(std::time(0));
-  this->box_names.clear();
-  this->box_points.clear();
-  this->box_markers_msg_.markers.clear();
-  this->box_points.emplace_back(ignition::math::Vector3d(16.576, -5.96, 1.0)); // add tree point
-
-  visualization_msgs::MarkerArray text_markers_msg;
-  for (int i = 1; i <= std::min(num, 9); ++i)
-  {
-    ignition::math::Vector3d point;
-    // Generate random box_points within a 10 by 8 area with a distance greater than 4.3
-    bool has_collision = true;
-    while (has_collision)
+    if (num > 9)
     {
-      has_collision = false;
-      point = ignition::math::Vector3d(static_cast<double>(std::rand()) / RAND_MAX * 8.0 + 8,
-                                       -6.25 + static_cast<double>(std::rand()) / RAND_MAX * 7.25,
-                                       0.4);
-      for (const auto& pre_point : this->box_points)
-      {
-        const double dist = (point - pre_point).Length();
-        if (dist <= 1.2)
+        ROS_WARN_STREAM("Maximum 9 boxes are allowed!, Spawning 9 boxes instead");
+    }
+
+    std::srand(std::time(0)); // Seed the random generator
+    this->box_names.clear();
+    this->box_points.clear();
+    this->box_markers_msg_.markers.clear();
+    this->box_points.emplace_back(ignition::math::Vector3d(16.576, -5.96, 1.0)); // add tree point
+
+    visualization_msgs::MarkerArray text_markers_msg;
+    std::vector<ignition::math::Vector3d> all_points;
+    for (int i = 1; i <= std::min(num, 9); ++i)
+    {
+        ignition::math::Vector3d point;
+        bool has_collision;
+        do
         {
-          has_collision = true;
-          break;
-        }
-      }
-    } 
+            has_collision = false;
+            point = ignition::math::Vector3d(static_cast<double>(std::rand()) / RAND_MAX * 8.0 + 8,
+                                             -6.25 + static_cast<double>(std::rand()) / RAND_MAX * 7.25,
+                                             0.4);
+            double min_distance = 1.2; // Default minimum distance
+            if (i == 4)
+            {
+                min_distance = 2.4; // Increase distance for box 4
+            }
 
-    // Add this box to the list
-    this->box_points.push_back(point);
-    const std::string box_name = "number" + std::to_string(i);
-    this->box_names.push_back(box_name);
+            for (const auto& pre_point : all_points)
+            {
+                if ((point - pre_point).Length() <= min_distance || (i != 4 && (point - all_points[3]).Length() <= 2.4))
+                {
+                    has_collision = true;
+                    break;
+                }
+            }
+        } while (has_collision);
 
-    msgs::Factory box_msg;
-    box_msg.set_sdf_filename("model://" + box_name); // TODO: change to our own file
-    // ignition::math::Vector3d spawn_point = ignition::math::Vector3d(point.X(), point.Y(), static_cast<double>(std::rand()) / RAND_MAX * 1.5 + 0.5);
-    msgs::Set(box_msg.mutable_pose(), ignition::math::Pose3d(point, ignition::math::Quaterniond(0, 0, 0)));
-    this->pub_factory_->Publish(box_msg);
+        all_points.push_back(point); // Store the confirmed point in the temporary vector
+        this->box_points.push_back(point);
+        const std::string box_name = "number" + std::to_string(i);
+        this->box_names.push_back(box_name);
 
-    visualization_msgs::Marker box_marker;
-    box_marker.header.frame_id = "world";
-    box_marker.header.stamp = ros::Time();
-    box_marker.ns = "gazebo";
-    box_marker.id = i;
-    box_marker.type = visualization_msgs::Marker::CUBE;
-    box_marker.action = visualization_msgs::Marker::ADD;
-    box_marker.frame_locked = true;
-    box_marker.lifetime = ros::Duration(0.2);
-    box_marker.pose.position.x = point.X();
-    box_marker.pose.position.y = point.Y();
-    box_marker.pose.position.z = point.Z();
-    box_marker.pose.orientation.x = 0.0;
-    box_marker.pose.orientation.y = 0.0;
-    box_marker.pose.orientation.z = 0.0;
-    box_marker.pose.orientation.w = 1.0;
-    box_marker.scale.x = 0.8;
-    box_marker.scale.y = 0.8;
-    box_marker.scale.z = 0.8;
-    box_marker.color.a = 0.7;
-    box_marker.color.r = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
-    box_marker.color.g = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
-    box_marker.color.b = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
-    this->box_markers_msg_.markers.emplace_back(box_marker);
+        msgs::Factory box_msg;
+        box_msg.set_sdf_filename("model://" + box_name); // TODO: change to our own file
+        // ignition::math::Vector3d spawn_point = ignition::math::Vector3d(point.X(), point.Y(), static_cast<double>(std::rand()) / RAND_MAX * 1.5 + 0.5);
+        msgs::Set(box_msg.mutable_pose(), ignition::math::Pose3d(point, ignition::math::Quaterniond(0, 0, 0)));
+        this->pub_factory_->Publish(box_msg);
 
-    visualization_msgs::Marker text_marker = box_marker;
-    text_marker.id = num + i;
-    text_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-    text_marker.text = std::to_string(i);
-    text_marker.pose.position.z += 0.5;
-    text_marker.scale.z = 0.5;
-    text_marker.color.a = 0.8;
-    text_marker.color.r = 0.0;
-    text_marker.color.g = 0.0;
-    text_marker.color.b = 0.0;
-    text_markers_msg.markers.emplace_back(text_marker);
-  }
 
-  // remove the tree point
-  this->box_points.erase(this->box_points.begin());
-  // merge the two marker arrays
-  this->box_markers_msg_.markers.insert(this->box_markers_msg_.markers.end(), text_markers_msg.markers.begin(), text_markers_msg.markers.end());
+        // Add markers for the box
+        visualization_msgs::Marker box_marker;
+        box_marker.header.frame_id = "world";
+        box_marker.header.stamp = ros::Time();
+        box_marker.ns = "gazebo";
+        box_marker.id = i;
+        box_marker.type = visualization_msgs::Marker::CUBE;
+        box_marker.action = visualization_msgs::Marker::ADD;
+        box_marker.frame_locked = true;
+        box_marker.lifetime = ros::Duration(0.2);
+        box_marker.pose.position.x = point.X();
+        box_marker.pose.position.y = point.Y();
+        box_marker.pose.position.z = point.Z();
+        box_marker.pose.orientation.x = 0.0;
+        box_marker.pose.orientation.y = 0.0;
+        box_marker.pose.orientation.z = 0.0;
+        box_marker.pose.orientation.w = 1.0;
+        box_marker.scale.x = 0.8;
+        box_marker.scale.y = 0.8;
+        box_marker.scale.z = 0.8;
+        box_marker.color.a = 0.7;
+        box_marker.color.r = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
+        box_marker.color.g = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
+        box_marker.color.b = static_cast<double>(std::rand()) / RAND_MAX * 0.5 + 0.25;
+        this->box_markers_msg_.markers.emplace_back(box_marker);
 
-  return;
+        visualization_msgs::Marker text_marker = box_marker;
+        text_marker.id = num + i;
+        text_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+        text_marker.text = std::to_string(i);
+        text_marker.pose.position.z += 0.5;
+        text_marker.scale.z = 0.5;
+        text_marker.color.a = 0.8;
+        text_marker.color.r = 0.0;
+        text_marker.color.g = 0.0;
+        text_marker.color.b = 0.0;
+        text_markers_msg.markers.emplace_back(text_marker);
+    }
+
+    // Remove the tree point
+    this->box_points.erase(this->box_points.begin());
+    // Merge the two marker arrays
+    this->box_markers_msg_.markers.insert(this->box_markers_msg_.markers.end(), text_markers_msg.markers.begin(), text_markers_msg.markers.end());
+
+    return;
 };
+
 
 void ObjectSpawner::deleteObject(const std::string& object_name)
 {
